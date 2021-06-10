@@ -46,8 +46,16 @@ pipeline {
             steps {
                 dir ('frontend'){
                     git 'https://github.com/lmbleandro/tasks-frontend.git'
-                    sh 'mvn clean package -DskipTests=true'
+                    sh 'mvn test'
                     deploy adapters: [tomcat8(credentialsId: 'TomcatLogin', path: '', url: 'http://10.151.83.127:8001/')], contextPath: '/tasks', war: 'target/tasks.war'
+                }
+            }
+        }
+        stage ('Automate Tests') {
+            steps {
+                dir ('automate_test'){
+                    git 'https://github.com/lmbleandro/tasks-functional-tests.git'
+                    sh 'mvn clean package'
                 }
             }
         }
