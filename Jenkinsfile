@@ -55,7 +55,7 @@ pipeline {
             steps {
                 dir ('automate_test'){
                     git 'https://github.com/lmbleandro/tasks-functional-tests.git'
-                    sh 'mvn clean package'
+                    sh 'mvn test'
                 }
             }
         }
