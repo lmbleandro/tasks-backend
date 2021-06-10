@@ -36,9 +36,10 @@ pipeline {
         }
         stage ('API Test') {
             steps {
-                dir('api-test')
-                git 'https://github.com/lmbleandro/tasks-api-test'
-                sh 'mvn test'
+                dir ('api-test'){
+                    git 'https://github.com/lmbleandro/tasks-api-test'
+                    sh 'mvn test'
+                }
             }
         }
     }
