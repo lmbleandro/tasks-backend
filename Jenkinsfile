@@ -42,6 +42,13 @@ pipeline {
                 }
             }
         }
+        stage ('Deploy FrontEnd') {
+            steps {
+                dir ('frontend'){
+                git 'https://github.com/lmbleandro/tasks-frontend.git'
+                deploy adapters: [tomcat8(credentialsId: 'TomcatLogin', path: '', url: 'http://10.151.83.127:8001/')], contextPath: '/tasks', war: 'target/tasks.war'
+            }
+        }
     }
 }
 
