@@ -76,17 +76,15 @@ pipeline {
     }
     post{
         always{
-            junit allowEmptyResults: true, testResults: 'target/surefire-reports/*.xml, \
-                                                         api-test/target/surefire-reports/*.xml, \
-                                                         functional-test/target/surefire-reports/*.xml, \
-                                                         functional-test/target/failsafe-reports/*.xml'
+            junit allowEmptyResults: true, testResults: 'target/surefire-reports/*.xml, api-test/target/surefire-reports/*.xml, functional-test/target/surefire-reports/*.xml, functional-test/target/failsafe-reports/*.xml'
 
         }
         unsuccessful {
-            emailext attachLog: true, body: 'See the attached log bellow', subject: 'Build $BUILD_NUMBER has failed', to: 'lmbleandro2010+jenkins@gmail.com'
+            emailext attachLog: true, body: 'See the attached log bellow', subject: 'Build $BUIlD_NUMBER has failed', to: 'lmbleandro2010@gmail.com'       
         }
+
         fixed {
-            emailext attachLog: true, body: 'See the attached log bellow', subject: 'Build is fine!!!', to: 'lmbleandro2010+jenkins@gmail.com'
+            emailext attachLog: true, body: 'See the attached log bellow', subject: 'Build is fine!!!', to: 'lmbleandro2010@gmail.com'
         }
     }
 }
