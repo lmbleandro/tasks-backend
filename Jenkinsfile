@@ -46,7 +46,7 @@ pipeline {
             steps {
                 dir ('frontend'){
                     git 'https://github.com/lmbleandro/tasks-frontend.git'
-                    sh 'mvn test'
+                    sh 'mvn clean package'
                     deploy adapters: [tomcat8(credentialsId: 'TomcatLogin', path: '', url: 'http://10.151.83.127:8001/')], contextPath: '/tasks', war: 'target/tasks.war'
                 }
             }
@@ -63,6 +63,14 @@ pipeline {
             steps {
                 sh 'docker-compose build'
                 sh 'docker-compose up -d'
+            }
+        }
+        stage ('Helth Check') {
+            steps {
+                sleep(5)
+                dir ('automate_test'){
+                    sh 'mvn verify -Dskip.surefire.tests'
+                }
             }
         }
     }
