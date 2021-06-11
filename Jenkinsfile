@@ -82,5 +82,11 @@ pipeline {
                                                          functional-test/target/failsafe-reports/*.xml'
 
         }
+        unsuccessful {
+            emailext attachlog: true, body: 'See the attached log bellow', subject 'Build $BUILD_NUMBER has failed', to: 'lmbleandro+jenkins@gmail.com'
+        }
+        fixed {
+            emailext attachlog: true, body: 'See the attached log bellow', subject 'Build is fine!!!', to: 'lmbleandro+jenkins@gmail.com'
+        }
     }
 }
